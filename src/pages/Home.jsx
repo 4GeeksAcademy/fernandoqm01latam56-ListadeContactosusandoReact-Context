@@ -1,16 +1,20 @@
-import rigoImageUrl from "../assets/img/rigo-baby.jpg";
-import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import { useNavigate } from "react-router-dom";
 
-export const Home = () => {
+export function Home() {
+  const navigate = useNavigate();
 
-  const {store, dispatch} =useGlobalReducer()
-
-	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
-		</div>
-	);
-}; 
+  return (
+    <div className="container text-center my-5  bg-primary text-white rounded-pill">
+      <h1 className="display-4 mt-3 p-3">Bienvenido a tu Agenda de Contactos</h1>
+      <p className="lead mt-3">
+        Administra tus contactos: crea, edita y elimina.
+      </p>
+      <button
+        className="btn btn btn-info btn-lg mt-4 mb-4 rounded-pill "
+        onClick={() => navigate("/contacts")}
+      >
+        Ver mis contactos
+      </button>
+    </div>
+  );
+}
