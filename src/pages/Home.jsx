@@ -5,7 +5,7 @@ export function Home() {
 
   return (
     <div className="container text-center my-5  bg-primary text-white rounded-pill">
-      <h1 className="display-4 mt-3 p-3">Bienvenido a tu Agenda de Contactos</h1>
+      <h2 className="display-4 mt-3 p-5">Bienvenido a tu Lista de Contactos</h2>
       <p className="lead mt-3">
         Administra tus contactos: crea, edita y elimina.
       </p>

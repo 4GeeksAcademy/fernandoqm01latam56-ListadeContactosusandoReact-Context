@@ -137,10 +137,22 @@ export function ListaDeContacto() {
               >
                 <i className="fa-solid fa-trash-can"></i>
               </button>
+
             </div>
+
+
           </li>
+
+
         ))}
       </ul>
+      <div className="d-flex justify-content-center">
+        <button
+          type="button"
+          className="btn btn-info mt-2 "
+          onClick={() => navigate("/")}
+        >Home</button>
+      </div>
     </div>
   );
 }

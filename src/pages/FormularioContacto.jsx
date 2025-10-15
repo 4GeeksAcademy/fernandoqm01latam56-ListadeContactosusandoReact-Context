@@ -23,13 +23,13 @@ function formReducer(state, action) {
 
 export function FormularioContacto() {
   const navigate = useNavigate();
-  const { id } = useParams(); // <- capturamos el id de la URL
+  const { id } = useParams();
   const [formData, dispatch] = useReducer(formReducer, initialState);
 
-  // Cargar datos si estamos editando
+
   useEffect(() => {
     const loadContact = async () => {
-      if (!id) return; // creando nuevo contacto
+      if (!id) return;
 
       try {
         const res = await fetch(
@@ -38,7 +38,7 @@ export function FormularioContacto() {
         if (!res.ok) throw new Error("No se pudo cargar contactos");
         const data = await res.json();
 
-        // Buscar contacto con id
+
         const contact = data.contacts.find((c) => c.id === parseInt(id));
         if (contact) dispatch({ type: "SET_DATA", payload: contact });
       } catch (err) {
@@ -49,7 +49,7 @@ export function FormularioContacto() {
   }, [id]);
 
 
-  // Manejar cambios
+
   const handleChange = (e) => {
     dispatch({
       type: "UPDATE_FIELD",
@@ -58,9 +58,15 @@ export function FormularioContacto() {
     });
   };
 
-  // Guardar contacto (crear o editar)
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const { name, email, phone, address } = formData;
+    if (!name || !email || !phone || !address) {
+      alert("Completa todos los campos antes de guardar.");
+      return;
+    }
 
     const method = id ? "PUT" : "POST";
     const url = id
@@ -85,6 +91,7 @@ export function FormularioContacto() {
       console.error(error);
     }
   };
+
 
   return (
     <div className="container my-4">
@@ -118,10 +125,19 @@ export function FormularioContacto() {
           value={formData.address}
           onChange={handleChange}
         />
-        <button type="submit" className="btn btn-success mt-2">
+        <div className="d-flex justify-content-between">
+          <button type="submit" className="btn btn-success mt-2">
           {id ? "Actualizar" : "Guardar"}
         </button>
+        <button
+          type="button"
+          className="btn btn-info mt-2 "
+          onClick={() => navigate("/")}
+        >Home</button>
+        </div>
       </form>
+
     </div>
+
   );
 }
